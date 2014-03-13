@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-        <title>Problems solved</title>
+        <title>Upgrading ChinesePod to iOS 6</title>
         <meta charset="utf-8" />
 
 
@@ -43,36 +43,45 @@
               </ul>
             </div>
 
-<section id="content">
-<h2>Articles in the Python category</h2>
-
+<section id="content" class="body">
 
    <div class="row">
-
-
         <div class="eleven columns">
-		         <ol id="post-list">
-				        <li><article class="hentry">
-				                <header> <h2 class="entry-title"><a href="/my-super-post.html" rel="bookmark" title="Permalink to My super title">My super title</a></h2> </header>
-				                <footer class="post-info">
-				                    <abbr class="published" title="2014-01-28T10:40:00"> Tue 28 January 2014 </abbr>
-<address class="vcard author">By <a class="url fn" href="/author/yi-zeng.html">Yi Zeng</a></address>				                </footer><!-- /.post-info -->
-				                <div class="entry-content"> <p>Short version for index and feeds</p> </div><!-- /.entry-content -->
-
-								<div class="medium primary btn"><a href="/my-super-post.html" rel="bookmark" title="Permalink to My super title">Read more <i class="icon-arrow-right"></i></a></div>
 
 
+            <header>
+              <h2 class="entry-title">
+                <a href="/upgrade_to_iOS6.html" rel="bookmark"
+                   title="Permalink to Upgrading ChinesePod to iOS 6">Upgrading ChinesePod to iOS 6</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2014-01-29T00:00:00">
+                Wed 29 January 2014
+              </abbr>
+              <address class="vcard author">
+                By <a class="url fn" href="/author/yi-zeng.html">Yi Zeng</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h2>Upgrading from iOS 5 - iOS 6.</h2>
+<p>This seems to be easy on ChinesePod.
+All I did was to change the compile target from 5.0 to 6.0.</p>
+<p>Then if it says dispatch_release error just use the following:</p>
+<div class="highlight"><pre><span class="cm">/*header*/</span>
+  <span class="p">#</span><span class="k">if</span> <span class="no">__IPHONE_OS_VERSION_MIN_REQUIRED</span> <span class="o">&gt;=</span> <span class="mh">60000</span>
+      <span class="p">#</span><span class="n">define</span> <span class="no">NEEDS_DISPATCH_RETAIN_RELEASE</span> <span class="mh">0</span>
+  <span class="p">#</span><span class="k">else</span>
+      <span class="p">#</span><span class="n">define</span> <span class="no">NEEDS_DISPATCH_RETAIN_RELEASE</span> <span class="mh">1</span>
+  <span class="p">#</span><span class="n">endif</span>
 
-								<div class="row tag-row">
-										<span>Tagged as : </span>
-											<a class="danger label" href="/tag/pelican.html">pelican</a>
-											<a class="danger label" href="/tag/publishing.html">publishing</a>
-								</div>
+<span class="cm">/* implementation */</span>
+  <span class="p">#</span><span class="k">if</span> <span class="no">NEEDS_DISPATCH_RETAIN_RELEASE</span>
+      <span class="n">dispatch_release</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">reachabilitySerialQueue</span><span class="p">);</span>
+  <span class="p">#</span><span class="n">endif</span>
+</pre></div>
+            </div><!-- /.entry-content -->
 
-
-
-				        </article></li>
-				</ol><!-- /#posts-list -->
 
         </div><!-- /.eleven.columns -->
         
@@ -110,10 +119,8 @@
 
 </div> </div><!-- /.row -->
 
-<p class="paginator">
-    Page 1 / 1
-</p>
-</section><!-- /#content -->
+
+</section>
 
        </div><!-- /.row -->
     </div><!-- /.container -->
